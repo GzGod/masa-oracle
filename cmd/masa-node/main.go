@@ -8,15 +8,15 @@ import (
 
 	"github.com/multiformats/go-multiaddr"
 
-	"github.com/masa-finance/masa-oracle/internal/versioning"
+	"github.com/Gzgod/masa-oracle/internal/versioning"
 
 	"github.com/sirupsen/logrus"
 
-	"github.com/masa-finance/masa-oracle/node"
-	"github.com/masa-finance/masa-oracle/pkg/api"
-	"github.com/masa-finance/masa-oracle/pkg/config"
-	"github.com/masa-finance/masa-oracle/pkg/db"
-	"github.com/masa-finance/masa-oracle/pkg/staking"
+	"github.com/Gzgod/masa-oracle/node"
+	"github.com/Gzgod/masa-oracle/pkg/api"
+	"github.com/Gzgod/masa-oracle/pkg/config"
+	"github.com/Gzgod/masa-oracle/pkg/db"
+	"github.com/Gzgod/masa-oracle/pkg/staking"
 )
 
 func main() {
