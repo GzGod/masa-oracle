@@ -38,7 +38,7 @@ func handleMenu(app *tview.Application, output *tview.TextView) *tview.List {
 		AddItem("连接", "[darkgray]连接到一个oracle节点", '1', func() {
 			handleOption(app, "1", output)
 		}).
-		// 项目 2-5 已移除 - LLM 功能在 https://github.com/masa-finance/masa-oracle/pull/626 中被删除
+		// 项目 2-5 已移除 - LLM 功能在 https://github.com/GzGod/masa-oracle/pull/626 中被删除
 		AddItem("Oracle 节点", "[darkgray]查看活动节点", '6', func() {
 			handleOption(app, "6", output)
 		})
