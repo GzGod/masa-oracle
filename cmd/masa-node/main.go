@@ -21,14 +21,17 @@ import (
 
 func main() {
 
+	// 设置日志级别为 Debug
 	logrus.SetLevel(logrus.DebugLevel)
-	logrus.Debug("Log level set to Debug")
+	logrus.Debug("日志级别设置为 Debug")
 
+	// 处理命令行参数
 	if len(os.Args) > 1 && os.Args[1] == "--version" {
-		logrus.Infof("Masa Oracle Node Version: %s\nMasa Oracle Protocol verison: %s", versioning.ApplicationVersion, versioning.ProtocolVersion)
+		logrus.Infof("Masa Oracle Node 版本: %s\nMasa Oracle 协议版本: %s", versioning.ApplicationVersion, versioning.ProtocolVersion)
 		os.Exit(0)
 	}
 
+	// 获取配置
 	cfg, err := config.GetConfig()
 	if err != nil {
 		logrus.Fatalf("[-] %v", err)
@@ -37,70 +40,77 @@ func main() {
 	cfg.SetupLogging()
 	cfg.LogConfig()
 
-	// Create a cancellable context
+	// 创建一个可取消的上下文
 	ctx, cancel := context.WithCancel(context.Background())
 
+	// 处理水龙头事件
 	if cfg.Faucet {
 		err := handleFaucet(cfg.RpcUrl, cfg.KeyManager.EcdsaPrivKey)
 		if err != nil {
 			logrus.Errorf("[-] %v", err)
 			os.Exit(1)
 		} else {
-			logrus.Info("[+] Faucet event completed for this address")
+			logrus.Info("[+] 水龙头事件已完成")
 			os.Exit(0)
 		}
 	}
 
+	// 处理质押事件
 	if cfg.StakeAmount != "" {
 		err := handleStaking(cfg.RpcUrl, cfg.KeyManager.EcdsaPrivKey, cfg.StakeAmount)
 		if err != nil {
 			logrus.Warningf("%v", err)
 		} else {
-			logrus.Info("[+] Staking event completed for this address")
+			logrus.Info("[+] 质押事件已完成")
 			os.Exit(0)
 		}
 	}
 
-	// Verify the staking event
+	// 验证质押事件
 	isStaked, err := staking.VerifyStakingEvent(cfg.RpcUrl, cfg.KeyManager.EthAddress)
 	if err != nil {
 		logrus.Error(err)
 	}
 
 	if !isStaked {
-		logrus.Warn("No staking event found for this address")
+		logrus.Warn("未找到此地址的质押事件")
 	}
 
+	// 初始化节点选项
 	masaNodeOptions, workHandlerManager, pubKeySub := config.InitOptions(cfg)
-	// Create a new OracleNode
+	// 创建一个新的 OracleNode
 	masaNode, err := node.NewOracleNode(ctx, masaNodeOptions...)
 
 	if err != nil {
 		logrus.Fatal(err)
 	}
 
+	// 启动节点
 	if err = masaNode.Start(); err != nil {
 		logrus.Fatal(err)
 	}
 
+	// 检查配置是否启用了所有类型的爬虫
 	if cfg.TwitterScraper && cfg.DiscordScraper && cfg.WebScraper {
-		logrus.Warn("[+] Node is set as all types of scrapers. This may not be intended behavior.")
+		logrus.Warn("[+] 节点设置为所有类型的爬虫。这可能不是预期的行为。")
 	}
 
+	// 设置允许的对等节点
 	if cfg.AllowedPeer {
 		cfg.AllowedPeerId = masaNode.Host.ID().String()
 		cfg.AllowedPeerPublicKey = cfg.KeyManager.HexPubKey
-		logrus.Infof("[+] Allowed peer with ID: %s and PubKey: %s", cfg.AllowedPeerId, cfg.AllowedPeerPublicKey)
+		logrus.Infof("[+] 允许的对等节点 ID: %s 和公钥: %s", cfg.AllowedPeerId, cfg.AllowedPeerPublicKey)
 	} else {
-		logrus.Warn("[-] This node is not set as the allowed peer")
+		logrus.Warn("[-] 此节点未设置为允许的对等节点")
 	}
 
-	// Init cache resolver
+	// 初始化缓存解析器
 	db.InitResolverCache(masaNode, cfg.KeyManager, cfg.AllowedPeerId, cfg.AllowedPeerPublicKey, cfg.Validator)
 
-	// Cancel the context when SIGINT is received
+	// 在收到 SIGINT 时取消上下文
 	go handleSignals(cancel, masaNode, cfg)
 
+	// 启动 API 服务器
 	if cfg.APIEnabled {
 		router := api.SetupRoutes(masaNode, workHandlerManager, pubKeySub)
 		go func() {
@@ -108,36 +118,41 @@ func main() {
 				logrus.Fatal(err)
 			}
 		}()
-		logrus.Info("API server started")
+		logrus.Info("API 服务器已启动")
 	} else {
-		logrus.Info("API server is disabled")
+		logrus.Info("API 服务器已禁用")
 	}
 
-	// Get the multiaddress and IP address of the node
-	multiAddr := masaNode.GetMultiAddrs()                      // Get the multiaddress
-	ipAddr, err := multiAddr.ValueForProtocol(multiaddr.P_IP4) // Get the IP address
+	// 获取节点的多地址和 IP 地址
+	multiAddr := masaNode.GetMultiAddrs()                      // 获取多地址
+	ipAddr, err := multiAddr.ValueForProtocol(multiaddr.P_IP4) // 获取 IP 地址
 	if err != nil {
-		logrus.Errorf("[-] Error while getting node IP address from %v: %v", multiAddr, err)
+		logrus.Errorf("[-] 从 %v 获取节点 IP 地址时出错: %v", multiAddr, err)
 	}
-	// Display the welcome message with the multiaddress and IP address
+	// 显示欢迎信息
 	config.DisplayWelcomeMessage(multiAddr.String(), ipAddr, cfg.KeyManager.EthAddress, isStaked, cfg.Validator, cfg.TwitterScraper, cfg.TelegramScraper, cfg.DiscordScraper, cfg.WebScraper, versioning.ApplicationVersion, versioning.ProtocolVersion)
 
 	<-ctx.Done()
 }
 
 func handleSignals(cancel context.CancelFunc, masaNode *node.OracleNode, cfg *config.AppConfig) {
+	// 创建一个通道来接收信号
 	c := make(chan os.Signal, 1)
 	signal.Notify(c, os.Interrupt, syscall.SIGTERM)
 
+	// 等待接收信号
 	<-c
+	// 获取节点数据
 	nodeData := masaNode.NodeTracker.GetNodeData(masaNode.Host.ID().String())
 	if nodeData != nil {
-		nodeData.Left()
+		nodeData.Left()  // 节点离开
 	}
+	// 取消上下文
 	cancel()
+	// 停止 Telegram 连接
 	if cfg.TelegramStop != nil {
 		if err := cfg.TelegramStop(); err != nil {
-			logrus.Errorf("Error stopping the background connection: %v", err)
+			logrus.Errorf("停止后台连接时出错: %v", err)
 		}
 	}
 }
