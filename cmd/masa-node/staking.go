@@ -9,7 +9,7 @@ import (
 	"github.com/fatih/color"
 	"github.com/sirupsen/logrus"
 
-	"github.com/masa-finance/masa-oracle/pkg/staking"
+	"github.com/GzGod/masa-oracle/pkg/staking"
 )
 
 func handleStaking(rpcUrl string, privateKey *ecdsa.PrivateKey, stakeAmount string) error {
