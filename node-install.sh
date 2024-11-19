@@ -1,35 +1,35 @@
 #!/bin/bash
 
-# Create the 'masa' user and set up home directory
+# 创建 'masa' 用户并设置主目录
 useradd -m masa
 
-# set RPC_URL
+# 设置 RPC_URL
 RPC_URL=https://ethereum-sepolia.publicnode.com 
 
-# Append the RPC_URL to the masa user's .bash_profile
+# 将 RPC_URL 追加到 masa 用户的 .bash_profile 中
 echo "export RPC_URL=${RPC_URL}" | tee -a /home/masa/.bash_profile
 
-# Set permissions for the masa user's home directory
+# 设置 masa 用户主目录的权限
 chown masa:masa /home/masa/.bash_profile
 
-# Install Node.js and Yarn
+# 安装 Node.js 和 Yarn
 curl -fsSL https://deb.nodesource.com/setup_lts.x | bash -
 curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | gpg --dearmor -o /usr/share/keyrings/yarn-archive-keyring.gpg
 echo "deb [signed-by=/usr/share/keyrings/yarn-archive-keyring.gpg] https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
 apt-get update -y && apt-get install -y yarn nodejs jq
 
-# Build go binary
+# 构建 go 二进制文件
 make build
 cp masa-node /usr/local/bin/masa-node
 chmod +x /usr/local/bin/masa-node
 
-# Determine global npm modules path and set NODE_PATH
+# 确定全局 npm 模块路径并设置 NODE_PATH
 GLOBAL_NODE_MODULES=$(npm root -g)
 export NODE_PATH=$GLOBAL_NODE_MODULES
 
 MASANODE_CMD="/usr/bin/masa-node --port=4001 --udp=true --tcp=false --start --bootnodes=${BOOTNODES}"
 
-# Create a systemd service file for masa-node
+# 为 masa-node 创建一个 systemd 服务文件
 cat <<EOF | sudo tee /etc/systemd/system/masa-node.service
 [Unit]
 Description=MASA Node Service
@@ -46,12 +46,12 @@ Restart=always
 WantedBy=multi-user.target
 EOF
 
-# Ensure the service file is owned by root
+# 确保服务文件由 root 拥有
 sudo chown root:root /etc/systemd/system/masa-node.service
 
-# Reload the systemd daemon
+# 重新加载 systemd 守护进程
 sudo systemctl daemon-reload
 
-# Enable and start the masa-node service
+# 启用并启动 masa-node 服务
 sudo systemctl enable masa-node
 sudo systemctl start masa-node
