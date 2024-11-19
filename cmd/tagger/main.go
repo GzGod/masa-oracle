@@ -1,24 +1,24 @@
 /*
-Package main - tagger
+主包 - 打标签工具
 
-The tagger is a utility tool designed to automate the process of versioning, building, and tagging Go projects. It streamlines the workflow by encapsulating several steps into a single command, reducing the potential for human error and increasing efficiency.
+打标签工具是一个实用工具，旨在自动化版本控制、构建和为 Go 项目打标签的过程。它通过将多个步骤封装成一个命令来简化工作流程，减少人为错误的可能性并提高效率。
 
-The tagger performs the following operations:
+打标签工具执行以下操作：
 
-1. Updates the project: It navigates to the project directory and pulls the latest changes from the specified branch. It then tidies up the dependencies using 'go mod tidy'.
+1. 更新项目：它导航到项目目录并从指定分支拉取最新更改。然后使用 'go mod tidy' 整理依赖项。
 
-2. Pushes changes: It stages and commits changes with a user-provided commit message, then pushes the commit to the specified branch.
+2. 推送更改：它暂存并提交带有用户提供的提交消息的更改，然后将提交推送到指定分支。
 
-3. Tags the project: It tags the current commit with a user-provided version tag and pushes the tag to the remote repository.
+3. 为项目打标签：它使用用户提供的版本标签为当前提交打标签，并将标签推送到远程仓库。
 
-4. Builds the project: It builds the project for multiple platforms (Linux, Darwin, and Windows) and outputs the binaries to the 'bin' directory in the project directory.
+4. 构建项目：它为多个平台（Linux、Darwin 和 Windows）构建项目，并将二进制文件输出到项目目录中的 'bin' 目录。
 
-The tagger is invoked from the command line with four flags: 'projectDir' (the project directory), 'version' (the version to tag), 'branch' (the branch to use), and 'commitMessage' (the commit message). All flags must be provided.
+打标签工具从命令行调用，带有四个标志：'projectDir'（项目目录）、'version'（要打的版本标签）、'branch'（要使用的分支）和 'commitMessage'（提交消息）。必须提供所有标志。
 
-Example usage:
+使用示例：
 go run tag_project.go -projectDir=/path/to/project -version=1.0.0 -branch=main -commitMessage="Update go.mod"
 
-This utility tool is intended for use by developers who need to regularly version, build, and tag the project. It assumes that the user has a working Go environment and is familiar with basic Git operations.
+该实用工具适用于需要定期版本控制、构建和为项目打标签的开发人员。它假定用户有一个可用的 Go 环境并熟悉基本的 Git 操作。
 */
 
 package main
@@ -33,87 +33,87 @@ import (
 	"path/filepath"
 )
 
-func updateProject(projectDir, branch string) error {
-	// Change to the project directory
-	if err := os.Chdir(projectDir); err != nil {
+func 更新项目(项目目录, 分支 string) error {
+	// 切换到项目目录
+	if err := os.Chdir(项目目录); err != nil {
 		return err
 	}
 
-	// Execute git pull
-	if err := runCommand("git", "pull", "origin", branch); err != nil {
+	// 执行 git pull
+	if err := 运行命令("git", "pull", "origin", 分支); err != nil {
 		return err
 	}
-	// Execute go mod tidy
-	if err := runCommand("go", "mod", "tidy"); err != nil {
-		return fmt.Errorf("[-] Failed to tidy dependencies: %w", err)
+	// 执行 go mod tidy
+	if err := 运行命令("go", "mod", "tidy"); err != nil {
+		return fmt.Errorf("[-] 整理依赖项失败: %w", err)
 	}
 	return nil
 }
 
-func pushChanges(projectDir, commitMessage, branch string) (err error) {
-	// Change to the project directory
-	if err := os.Chdir(projectDir); err != nil {
+func 推送更改(项目目录, 提交消息, 分支 string) (err error) {
+	// 切换到项目目录
+	if err := os.Chdir(项目目录); err != nil {
 		return err
 	}
 
-	// Execute git add .
-	if err := runCommand("git", "add", "."); err != nil {
+	// 执行 git add .
+	if err := 运行命令("git", "add", "."); err != nil {
 		return err
 	}
 
-	// Execute git commit -m "update go.mod"
-	if err := runCommand("git", "commit", "-m", commitMessage); err != nil {
+	// 执行 git commit -m "更新 go.mod"
+	if err := 运行命令("git", "commit", "-m", 提交消息); err != nil {
 		return err
 	}
 
-	// Execute git push origin main
-	if err := runCommand("git", "push", "origin", branch); err != nil {
-		return err
-	}
-	return nil
-}
-
-func tagProject(projectDir, version string) error {
-	// Change to the project directory
-	if err := os.Chdir(projectDir); err != nil {
-		return err
-	}
-	if err := runCommand("git", "tag", "-a", version, "-m", fmt.Sprintf("Version %s", version)); err != nil {
-		return err
-	}
-
-	// Execute git push --tags
-	if err := runCommand("git", "push", "--tags"); err != nil {
+	// 执行 git push origin main
+	if err := 运行命令("git", "push", "origin", 分支); err != nil {
 		return err
 	}
 	return nil
 }
 
-func runCommand(command string, args ...string) error {
-	fmt.Printf("Running command: %s %v\n", command, args)
-	cmd := exec.Command(command, args...)
+func 为项目打标签(项目目录, 版本 string) error {
+	// 切换到项目目录
+	if err := os.Chdir(项目目录); err != nil {
+		return err
+	}
+	if err := 运行命令("git", "tag", "-a", 版本, "-m", fmt.Sprintf("版本 %s", 版本)); err != nil {
+		return err
+	}
+
+	// 执行 git push --tags
+	if err := 运行命令("git", "push", "--tags"); err != nil {
+		return err
+	}
+	return nil
+}
+
+func 运行命令(命令 string, 参数 ...string) error {
+	fmt.Printf("运行命令: %s %v\n", 命令, 参数)
+	cmd := exec.Command(命令, 参数...)
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr
 	return cmd.Run()
 }
 
-func TagProject(projectDir, version, branch, commitMessage string) (err error) {
-	if projectDir == "" {
+func 打标签项目(项目目录, 版本, 分支, 提交消息 string) (err error) {
+	if 项目目录 == "" {
 		usr, err := user.Current()
 		if err != nil {
-			log.Fatal("could not find user.home directory")
+			log.Fatal("无法找到用户的 home 目录")
 		}
-		projectDir = filepath.Join(usr.HomeDir, "github", "masa-finance")
+		项目目录 = filepath.Join(usr.HomeDir, "github", "masa-finance")
 	}
-	err = updateProject(projectDir, branch)
+	err = 更新项目(项目目录, 分支)
 	if err != nil {
 		return err
 	}
-	err = pushChanges(projectDir, commitMessage, branch)
+	err = 推送更改(项目目录, 提交消息, 分支)
 	if err != nil {
 		return err
 	}
-	err = tagProject(projectDir, version)
+	err = 为项目打标签(项目目录, 版本)
 	if err != nil {
 		return err
 	}
@@ -121,27 +121,27 @@ func TagProject(projectDir, version, branch, commitMessage string) (err error) {
 }
 
 func main() {
-	// Define flags
-	projectDir := flag.String("projectDir", "", "The project directory")
-	version := flag.String("version", "", "The version to tag")
-	branch := flag.String("branch", "", "The branch to use")
-	commitMessage := flag.String("commitMessage", "", "The commit message")
+	// 定义标志
+	项目目录 := flag.String("projectDir", "", "项目目录")
+	版本 := flag.String("version", "", "要打的版本标签")
+	分支 := flag.String("branch", "", "要使用的分支")
+	提交消息 := flag.String("commitMessage", "", "提交消息")
 
-	// Parse flags
+	// 解析标志
 	flag.Parse()
 
-	// Check that all flags have been provided
-	if *projectDir == "" || *version == "" || *branch == "" || *commitMessage == "" {
-		fmt.Println("Error: All flags must be provided")
-		fmt.Println("Usage: tag_project -projectDir=<projectDir> -version=<version> -branch=<branch> -commitMessage=<commitMessage>")
+	// 检查是否提供了所有标志
+	if *项目目录 == "" || *版本 == "" || *分支 == "" || *提交消息 == "" {
+		fmt.Println("错误: 必须提供所有标志")
+		fmt.Println("用法: tag_project -projectDir=<projectDir> -version=<version> -branch=<branch> -commitMessage=<commitMessage>")
 		os.Exit(1)
 	}
 
-	// Call TagProject with the parsed arguments
-	err := TagProject(*projectDir, *version, *branch, *commitMessage)
+	// 使用解析的参数调用打标签项目
+	err := 打标签项目(*项目目录, *版本, *分支, *提交消息)
 	if err != nil {
-		fmt.Printf("Error: %v\n", err)
+		fmt.Printf("错误: %v\n", err)
 	} else {
-		fmt.Println("Update and tagging completed successfully.")
+		fmt.Println("更新和打标签成功完成。")
 	}
 }
