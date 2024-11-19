@@ -23,7 +23,7 @@ func main() {
 
 	output := tview.NewTextView().
 		SetDynamicColors(true).
-		SetText(" Welcome to the MASA Oracle Client ").
+		SetText(" 欢迎使用 MASA Oracle 客户端 ").
 		SetTextAlign(tview.AlignCenter)
 
 	content := Splash()
