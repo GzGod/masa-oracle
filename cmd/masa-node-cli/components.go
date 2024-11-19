@@ -10,18 +10,18 @@ import (
 	"github.com/rivo/tview"
 )
 
-// NewInputBox returns a new inputbox primitive.
+// NewInputBox 返回一个新的输入框原件。
 func NewInputBox() *InputBox {
 	textView := tview.NewTextView().SetDynamicColors(true).SetRegions(true)
 	return &InputBox{
-		Box:      tview.NewBox().SetBorder(true).SetTitle("Input"),
+		Box:      tview.NewBox().SetBorder(true).SetTitle("输入"),
 		input:    make(chan rune),
 		textView: textView,
 	}
 }
 
-// InputHandler returns a function that processes keyboard input events for the InputBox.
-// It listens for rune input (character keys) and sends the rune (character) to the input channel of the InputBox.
+// InputHandler 返回一个处理输入框键盘输入事件的函数。
+// 它监听符文输入（字符键）并将符文（字符）发送到输入框的输入通道。
 func (i *InputBox) InputHandler() func(event *tcell.EventKey) *tcell.EventKey {
 	return func(event *tcell.EventKey) *tcell.EventKey {
 		if event.Key() == tcell.KeyRune {
@@ -31,7 +31,7 @@ func (i *InputBox) InputHandler() func(event *tcell.EventKey) *tcell.EventKey {
 	}
 }
 
-// Draw renders the InputBox on the provided screen.
+// Draw 在提供的屏幕上渲染输入框。
 func (i *InputBox) Draw(screen tcell.Screen) {
 	i.Box.DrawForSubclass(screen, i.Box)
 	x, y, width, height := i.GetInnerRect()
@@ -39,7 +39,7 @@ func (i *InputBox) Draw(screen tcell.Screen) {
 	i.textView.Draw(screen)
 }
 
-// NewRadioButtons returns a new radio button primitive.
+// NewRadioButtons 返回一个新的单选按钮原件。
 func NewRadioButtons(options []string, onSelect func(option string)) *RadioButtons {
 	return &RadioButtons{
 		Box:      tview.NewBox(),
@@ -48,7 +48,7 @@ func NewRadioButtons(options []string, onSelect func(option string)) *RadioButto
 	}
 }
 
-// Draw draws this primitive onto the screen.
+// Draw 在屏幕上绘制此原件。
 func (r *RadioButtons) Draw(screen tcell.Screen) {
 	r.Box.DrawForSubclass(screen, r)
 	x, y, width, height := r.GetInnerRect()
@@ -57,16 +57,16 @@ func (r *RadioButtons) Draw(screen tcell.Screen) {
 		if index >= height {
 			break
 		}
-		radioButton := "\u25ef" // Unchecked.
+		radioButton := "\u25ef" // 未选中。
 		if index == r.currentOption {
-			radioButton = "\u25c9" // Checked.
+			radioButton = "\u25c9" // 选中。
 		}
 		line := fmt.Sprintf(`%s[white]  %s`, radioButton, option)
 		tview.Print(screen, line, x, y+index, width, tview.AlignLeft, tcell.ColorYellow)
 	}
 }
 
-// InputHandler returns the handler for this primitive.
+// InputHandler 返回此原件的输入处理程序。
 func (r *RadioButtons) InputHandler() func(event *tcell.EventKey, setFocus func(p tview.Primitive)) {
 	return r.WrapInputHandler(func(event *tcell.EventKey, setFocus func(p tview.Primitive)) {
 		switch event.Key() {
@@ -82,13 +82,13 @@ func (r *RadioButtons) InputHandler() func(event *tcell.EventKey, setFocus func(
 			}
 		case tcell.KeyEnter:
 			if r.onSelect != nil {
-				r.onSelect(r.options[r.currentOption]) // Call the onSelect callback with the selected option
+				r.onSelect(r.options[r.currentOption]) // 使用选定的选项调用 onSelect 回调
 			}
 		}
 	})
 }
 
-// MouseHandler returns the mouse handler for this primitive.
+// MouseHandler 返回此原件的鼠标处理程序。
 func (r *RadioButtons) MouseHandler() func(action tview.MouseAction, event *tcell.EventMouse, setFocus func(p tview.Primitive)) (consumed bool, capture tview.Primitive) {
 	return r.WrapMouseHandler(func(action tview.MouseAction, event *tcell.EventMouse, setFocus func(p tview.Primitive)) (consumed bool, capture tview.Primitive) {
 		x, y := event.Position()
@@ -104,8 +104,8 @@ func (r *RadioButtons) MouseHandler() func(action tview.MouseAction, event *tcel
 				r.currentOption = index
 				consumed = true
 				if r.onSelect != nil {
-					r.onSelect(r.options[r.currentOption]) // Call the callback with the selected option
-					// Logic to close the RadioButtons view goes here
+					r.onSelect(r.options[r.currentOption]) // 使用选定的选项调用回调
+					// 关闭单选按钮视图的逻辑
 				}
 			}
 		}
@@ -122,13 +122,13 @@ const logo = `
 `
 
 const (
-	subtitle   = `masa oracle client`
-	navigation = `[yellow]use keys or mouse to navigate`
+	subtitle   = `masa oracle 客户端`
+	navigation = `[yellow]使用键盘或鼠标导航`
 )
 
-var version string = fmt.Sprintf(`[green]Application version: %s\n[green]Protocol Version: %s`, versioning.ApplicationVersion, versioning.ProtocolVersion)
+var version string = fmt.Sprintf(`[green]应用程序版本: %s\n[green]协议版本: %s`, versioning.ApplicationVersion, versioning.ProtocolVersion)
 
-// Splash shows the app info
+// Splash 显示应用程序信息
 func Splash() (content tview.Primitive) {
 	lines := strings.Split(logo, "\n")
 	logoWidth := 0
@@ -141,7 +141,7 @@ func Splash() (content tview.Primitive) {
 	logoBox := tview.NewTextView().
 		SetTextColor(tcell.ColorGreen).
 		SetDoneFunc(func(key tcell.Key) {
-			// nothing todo
+			// 无操作
 		})
 	fmt.Fprint(logoBox, logo)
 
@@ -152,7 +152,7 @@ func Splash() (content tview.Primitive) {
 		AddText(navigation, true, tview.AlignCenter, tcell.ColorDarkMagenta).
 		AddText(version, true, tview.AlignCenter, tcell.ColorDarkMagenta)
 
-	// Create a Flex layout that centers the logo and subtitle.
+	// 创建一个 Flex 布局以居中显示 logo 和副标题。
 	flex := tview.NewFlex().
 		SetDirection(tview.FlexRow).
 		AddItem(tview.NewBox(), 0, 7, false).
