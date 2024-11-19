@@ -5,7 +5,7 @@ import (
 	"strings"
 
 	"github.com/gdamore/tcell/v2"
-	"github.com/masa-finance/masa-oracle/internal/versioning"
+	"github.com/GzGod/masa-oracle/internal/versioning"
 
 	"github.com/rivo/tview"
 )
