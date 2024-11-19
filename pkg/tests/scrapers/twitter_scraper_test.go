@@ -14,7 +14,7 @@ import (
 	"runtime"
 
 	"github.com/joho/godotenv"
-	"github.com/masa-finance/masa-oracle/pkg/scrapers/twitter"
+	"github.com/Gzgod/masa-oracle/pkg/scrapers/twitter"
 	twitterscraper "github.com/masa-finance/masa-twitter-scraper"
 	. "github.com/onsi/ginkgo/v2"
 	. "github.com/onsi/gomega"

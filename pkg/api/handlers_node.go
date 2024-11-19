@@ -9,15 +9,15 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/masa-finance/masa-oracle/pkg/consensus"
-	"github.com/masa-finance/masa-oracle/pkg/db"
+	"github.com/Gzgod/masa-oracle/pkg/consensus"
+	"github.com/Gzgod/masa-oracle/pkg/db"
 	"github.com/sirupsen/logrus"
 
 	"github.com/gin-gonic/gin"
 
-	"github.com/masa-finance/masa-oracle/node"
-	"github.com/masa-finance/masa-oracle/pkg/config"
-	"github.com/masa-finance/masa-oracle/pkg/pubsub"
+	"github.com/Gzgod/masa-oracle/node"
+	"github.com/Gzgod/masa-oracle/pkg/config"
+	"github.com/Gzgod/masa-oracle/pkg/pubsub"
 )
 
 // GetNodeDataHandler handles GET requests to retrieve paginated node data from the node tracker.

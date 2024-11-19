@@ -7,9 +7,9 @@ import (
 	. "github.com/onsi/ginkgo/v2"
 	. "github.com/onsi/gomega"
 
-	. "github.com/masa-finance/masa-oracle/node"
-	"github.com/masa-finance/masa-oracle/pkg/config"
-	"github.com/masa-finance/masa-oracle/pkg/pubsub"
+	. "github.com/Gzgod/masa-oracle/node"
+	"github.com/Gzgod/masa-oracle/pkg/config"
+	"github.com/Gzgod/masa-oracle/pkg/pubsub"
 )
 
 var _ = Describe("NodeDataTracker", func() {

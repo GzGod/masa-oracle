@@ -44,14 +44,12 @@ To start processing Discord data requests, you need to retrieve your Discord bot
 
 ### Update Bot permissions and install
 
-1 . Go to the “Guild Install” section
+1 . Go to the “Guild Install�?section
 
-2 . Select on dropdown where is says “applications.commands and select “bot”
-
+2 . Select on dropdown where is says “applications.commands and select “bot�?
 > ![Update Bot Permissions](/img/discord-change-bot-permissions.png)
 
-3 . On the added permission dropdown after selecting bot, select “administrator”
-
+3 . On the added permission dropdown after selecting bot, select “administrator�?
 4 . Save changes on the bottom floating bar.
 
 > ![Save Bot Permissions](/img/discord-change-bot-permissions-2.png)
@@ -68,8 +66,7 @@ To start processing Discord data requests, you need to retrieve your Discord bot
 
 > ![Add Bot to Server](/img/discord-add-bot-to-server.png)
 
-9 . Click “Continue”
-
+9 . Click “Continue�?
 10 . Click Authorize to add your bot. Congrats screen and should see Bot on Discord now!
 
 > ![Bot Added](/img/discord-verify-bot.png)

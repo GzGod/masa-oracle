@@ -8,8 +8,8 @@ import (
 	"reflect"
 	"strings"
 
-	"github.com/masa-finance/masa-oracle/internal/versioning"
-	"github.com/masa-finance/masa-oracle/pkg/masacrypto"
+	"github.com/Gzgod/masa-oracle/internal/versioning"
+	"github.com/Gzgod/masa-oracle/pkg/masacrypto"
 
 	"github.com/gotd/contrib/bg"
 	"github.com/joho/godotenv"

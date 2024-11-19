@@ -13,7 +13,7 @@ import (
 
 	shell "github.com/ipfs/go-ipfs-api"
 	pubsub "github.com/libp2p/go-libp2p-pubsub"
-	"github.com/masa-finance/masa-oracle/pkg/chain"
+	"github.com/Gzgod/masa-oracle/pkg/chain"
 	"github.com/sirupsen/logrus"
 )
 

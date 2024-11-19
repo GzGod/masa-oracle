@@ -3,7 +3,7 @@ package chain_test
 import (
 	"math/big"
 
-	. "github.com/masa-finance/masa-oracle/pkg/chain"
+	. "github.com/Gzgod/masa-oracle/pkg/chain"
 
 	. "github.com/onsi/ginkgo/v2"
 	. "github.com/onsi/gomega"

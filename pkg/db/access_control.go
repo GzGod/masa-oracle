@@ -13,7 +13,7 @@ import (
 	"github.com/libp2p/go-libp2p/core/host"
 	"github.com/sirupsen/logrus"
 
-	"github.com/masa-finance/masa-oracle/pkg/consensus"
+	"github.com/Gzgod/masa-oracle/pkg/consensus"
 )
 
 // AuthorizedNodes Set of authorized nodes that can write to the database

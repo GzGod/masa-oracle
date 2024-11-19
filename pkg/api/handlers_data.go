@@ -19,13 +19,13 @@ import (
 	"github.com/multiformats/go-multiaddr"
 	"github.com/sirupsen/logrus"
 
-	"github.com/masa-finance/masa-oracle/pkg/chain"
-	"github.com/masa-finance/masa-oracle/pkg/config"
-	pubsub2 "github.com/masa-finance/masa-oracle/pkg/pubsub"
-	"github.com/masa-finance/masa-oracle/pkg/scrapers/discord"
-	"github.com/masa-finance/masa-oracle/pkg/scrapers/telegram"
-	"github.com/masa-finance/masa-oracle/pkg/workers"
-	data_types "github.com/masa-finance/masa-oracle/pkg/workers/types"
+	"github.com/Gzgod/masa-oracle/pkg/chain"
+	"github.com/Gzgod/masa-oracle/pkg/config"
+	pubsub2 "github.com/Gzgod/masa-oracle/pkg/pubsub"
+	"github.com/Gzgod/masa-oracle/pkg/scrapers/discord"
+	"github.com/Gzgod/masa-oracle/pkg/scrapers/telegram"
+	"github.com/Gzgod/masa-oracle/pkg/workers"
+	data_types "github.com/Gzgod/masa-oracle/pkg/workers/types"
 )
 
 // sendWorkRequest sends a work request to a worker for processing.

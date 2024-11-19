@@ -13,7 +13,7 @@ A Go package for tracking and sending analytics events.
 ## Usage
 
 ```go
-import "github.com/masa-finance/masa-oracle/pkg/event"
+import "github.com/Gzgod/masa-oracle/pkg/event"
 
 // Create a new event tracker with default config
 tracker := event.NewEventTracker(nil)

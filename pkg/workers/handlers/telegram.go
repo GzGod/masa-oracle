@@ -6,8 +6,8 @@ import (
 
 	"github.com/sirupsen/logrus"
 
-	"github.com/masa-finance/masa-oracle/pkg/scrapers/telegram"
-	"github.com/masa-finance/masa-oracle/pkg/workers/types"
+	"github.com/Gzgod/masa-oracle/pkg/scrapers/telegram"
+	"github.com/Gzgod/masa-oracle/pkg/workers/types"
 )
 
 type TelegramChannelHandler struct{}

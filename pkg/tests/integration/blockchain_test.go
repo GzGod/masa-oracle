@@ -7,8 +7,8 @@ import (
 	"fmt"
 	"os"
 
-	. "github.com/masa-finance/masa-oracle/node"
-	"github.com/masa-finance/masa-oracle/pkg/config"
+	. "github.com/Gzgod/masa-oracle/node"
+	"github.com/Gzgod/masa-oracle/pkg/config"
 	. "github.com/onsi/ginkgo/v2"
 	. "github.com/onsi/gomega"
 )

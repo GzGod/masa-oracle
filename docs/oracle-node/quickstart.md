@@ -8,7 +8,7 @@ Follow these steps to get your Masa Oracle node up and running quickly:
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/masa-finance/masa-oracle.git
+git clone https://github.com/Gzgod/masa-oracle.git
 cd masa-oracle
 ```
 

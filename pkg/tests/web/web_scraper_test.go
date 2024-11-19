@@ -11,7 +11,7 @@ package scrapers_test
 import (
 	"encoding/json"
 
-	"github.com/masa-finance/masa-oracle/pkg/scrapers/web"
+	"github.com/Gzgod/masa-oracle/pkg/scrapers/web"
 	. "github.com/onsi/ginkgo/v2"
 	. "github.com/onsi/gomega"
 	"github.com/sirupsen/logrus"

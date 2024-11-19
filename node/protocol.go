@@ -4,7 +4,7 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/masa-finance/masa-oracle/node/types"
+	"github.com/Gzgod/masa-oracle/node/types"
 
 	"github.com/libp2p/go-libp2p/core/network"
 	"github.com/libp2p/go-libp2p/core/peer"

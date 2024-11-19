@@ -5,7 +5,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 
-	"github.com/masa-finance/masa-oracle/pkg/pubsub"
+	"github.com/Gzgod/masa-oracle/pkg/pubsub"
 )
 
 // CreateNewTopicHandler creates a new topic with a given name and subscribes a handler to it.

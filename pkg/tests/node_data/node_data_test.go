@@ -6,7 +6,7 @@ import (
 	. "github.com/onsi/ginkgo/v2"
 	. "github.com/onsi/gomega"
 
-	"github.com/masa-finance/masa-oracle/pkg/pubsub"
+	"github.com/Gzgod/masa-oracle/pkg/pubsub"
 )
 
 var _ = Describe("NodeData", func() {

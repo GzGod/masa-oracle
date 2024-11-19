@@ -1,7 +1,7 @@
 package staking_test
 
 import (
-	. "github.com/masa-finance/masa-oracle/pkg/staking"
+	. "github.com/Gzgod/masa-oracle/pkg/staking"
 	. "github.com/onsi/ginkgo/v2"
 	. "github.com/onsi/gomega"
 )

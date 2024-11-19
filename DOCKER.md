@@ -17,7 +17,7 @@ Before you begin, ensure you have the following installed on your system:
 Start by cloning the masa-node repository to your local machine. Open a terminal and run:
 
 ```bash
-git clone git@github.com:masa-finance/masa-oracle.git
+git clone git@github.com:Gzgod/masa-oracle.git
 cd masa-oracle
 ```
 

@@ -6,7 +6,7 @@ import (
 	. "github.com/onsi/ginkgo/v2"
 	. "github.com/onsi/gomega"
 
-	. "github.com/masa-finance/masa-oracle/pkg/chain"
+	. "github.com/Gzgod/masa-oracle/pkg/chain"
 )
 
 var _ = Describe("Block", func() {

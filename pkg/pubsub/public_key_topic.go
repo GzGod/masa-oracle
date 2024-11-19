@@ -6,7 +6,7 @@ import (
 
 	pubsub "github.com/libp2p/go-libp2p-pubsub"
 	libp2pCrypto "github.com/libp2p/go-libp2p/core/crypto"
-	"github.com/masa-finance/masa-oracle/pkg/consensus"
+	"github.com/Gzgod/masa-oracle/pkg/consensus"
 	"github.com/sirupsen/logrus"
 )
 

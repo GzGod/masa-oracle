@@ -24,10 +24,10 @@ import (
 	"github.com/multiformats/go-multiaddr"
 	"github.com/sirupsen/logrus"
 
-	"github.com/masa-finance/masa-oracle/internal/versioning"
-	"github.com/masa-finance/masa-oracle/pkg/chain"
-	myNetwork "github.com/masa-finance/masa-oracle/pkg/network"
-	"github.com/masa-finance/masa-oracle/pkg/pubsub"
+	"github.com/Gzgod/masa-oracle/internal/versioning"
+	"github.com/Gzgod/masa-oracle/pkg/chain"
+	myNetwork "github.com/Gzgod/masa-oracle/pkg/network"
+	"github.com/Gzgod/masa-oracle/pkg/pubsub"
 )
 
 type OracleNode struct {

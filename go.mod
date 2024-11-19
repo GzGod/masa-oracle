@@ -1,4 +1,4 @@
-module github.com/masa-finance/masa-oracle
+module github.com/Gzgod/masa-oracle
 
 go 1.22.5
 

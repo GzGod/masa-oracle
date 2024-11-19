@@ -1,7 +1,7 @@
 package config
 
 import (
-	"github.com/masa-finance/masa-oracle/node"
+	"github.com/Gzgod/masa-oracle/node"
 	. "github.com/onsi/ginkgo/v2"
 	. "github.com/onsi/gomega"
 )

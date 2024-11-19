@@ -13,7 +13,7 @@ import (
 	ma "github.com/multiformats/go-multiaddr"
 	"github.com/sirupsen/logrus"
 
-	"github.com/masa-finance/masa-oracle/pkg/masacrypto"
+	"github.com/Gzgod/masa-oracle/pkg/masacrypto"
 )
 
 type NodeEventTracker struct {

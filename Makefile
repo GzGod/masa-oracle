@@ -23,8 +23,8 @@ dist:
 	$(GORELEASER) build --single-target --clean
 
 build: contracts/node_modules
-	@go build -v -ldflags "-X github.com/masa-finance/masa-oracle/internal/versioning.ApplicationVersion=${VERSION}" -o ./bin/masa-node ./cmd/masa-node
-	@go build -v -ldflags "-X github.com/masa-finance/masa-oracle/internal/versioning.ApplicationVersion=${VERSION}" -o ./bin/masa-node-cli ./cmd/masa-node-cli
+	@go build -v -ldflags "-X github.com/Gzgod/masa-oracle/internal/versioning.ApplicationVersion=${VERSION}" -o ./bin/masa-node ./cmd/masa-node
+	@go build -v -ldflags "-X github.com/Gzgod/masa-oracle/internal/versioning.ApplicationVersion=${VERSION}" -o ./bin/masa-node-cli ./cmd/masa-node-cli
 
 install:
 	@sh ./node_install.sh

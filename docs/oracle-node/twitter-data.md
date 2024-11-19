@@ -118,7 +118,7 @@ Example response:
         "description": {
           "urls": [
             {
-              "display_url": "t.me/airdropinspectâ€¦",
+              "display_url": "t.me/airdropinspectâ€?,
               "expanded_url": "https://t.me/airdropinspector",
               "url": "https://t.co/r00P2WS8la",
               "indices": [18, 41]
@@ -134,7 +134,7 @@ Example response:
         "url": {
           "urls": [
             {
-              "display_url": "linktr.ee/airdropinspectâ€¦",
+              "display_url": "linktr.ee/airdropinspectâ€?,
               "expanded_url": "https://linktr.ee/airdropinspector",
               "url": "https://t.co/QwVQ7gxzGn",
               "indices": [0, 23]

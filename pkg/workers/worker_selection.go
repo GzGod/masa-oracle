@@ -6,9 +6,9 @@ import (
 	"github.com/libp2p/go-libp2p/core/peer"
 	"github.com/sirupsen/logrus"
 
-	"github.com/masa-finance/masa-oracle/node"
-	"github.com/masa-finance/masa-oracle/pkg/pubsub"
-	data_types "github.com/masa-finance/masa-oracle/pkg/workers/types"
+	"github.com/Gzgod/masa-oracle/node"
+	"github.com/Gzgod/masa-oracle/pkg/pubsub"
+	data_types "github.com/Gzgod/masa-oracle/pkg/workers/types"
 )
 
 // GetEligibleWorkers returns eligible workers for a given message type.

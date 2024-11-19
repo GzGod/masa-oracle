@@ -7,16 +7,16 @@ import (
 	"log"
 	"time"
 
-	"github.com/masa-finance/masa-oracle/pkg/consensus"
-	"github.com/masa-finance/masa-oracle/pkg/masacrypto"
-	"github.com/masa-finance/masa-oracle/pkg/pubsub"
+	"github.com/Gzgod/masa-oracle/pkg/consensus"
+	"github.com/Gzgod/masa-oracle/pkg/masacrypto"
+	"github.com/Gzgod/masa-oracle/pkg/pubsub"
 
-	"github.com/masa-finance/masa-oracle/node"
+	"github.com/Gzgod/masa-oracle/node"
 
 	ds "github.com/ipfs/go-datastore"
 	"github.com/ipfs/go-datastore/query"
 	leveldb "github.com/ipfs/go-ds-leveldb"
-	"github.com/masa-finance/masa-oracle/pkg/config"
+	"github.com/Gzgod/masa-oracle/pkg/config"
 	"github.com/sirupsen/logrus"
 )
 

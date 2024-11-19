@@ -1,9 +1,9 @@
 package config
 
 import (
-	"github.com/masa-finance/masa-oracle/node"
-	"github.com/masa-finance/masa-oracle/pkg/pubsub"
-	"github.com/masa-finance/masa-oracle/pkg/workers"
+	"github.com/Gzgod/masa-oracle/node"
+	"github.com/Gzgod/masa-oracle/pkg/pubsub"
+	"github.com/Gzgod/masa-oracle/pkg/workers"
 )
 
 var constantOptions = []node.Option{

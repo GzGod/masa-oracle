@@ -7,7 +7,7 @@ import (
 
 	"github.com/ethereum/go-ethereum/accounts/abi"
 
-	"github.com/masa-finance/masa-oracle/contracts"
+	"github.com/Gzgod/masa-oracle/contracts"
 )
 
 const (

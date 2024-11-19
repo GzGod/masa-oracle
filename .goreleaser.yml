@@ -10,8 +10,8 @@ builds:
     binary: masa-node
     ldflags:
       - -w -s
-      - -X github.com/masa-finance/masa-oracle/internal.Version={{.Tag}}
-      - -X github.com/masa-finance/masa-oracle/internal.Commit={{.Commit}}
+      - -X github.com/Gzgod/masa-oracle/internal.Version={{.Tag}}
+      - -X github.com/Gzgod/masa-oracle/internal.Commit={{.Commit}}
     env:
       - CGO_ENABLED=0
     goos:
@@ -28,8 +28,8 @@ builds:
     binary: masa-node-cli
     ldflags:
       - -w -s
-      - -X github.com/masa-finance/masa-oracle/internal.Version={{.Tag}}
-      - -X github.com/masa-finance/masa-oracle/internal.Commit={{.Commit}}
+      - -X github.com/Gzgod/masa-oracle/internal.Version={{.Tag}}
+      - -X github.com/Gzgod/masa-oracle/internal.Commit={{.Commit}}
     env:
       - CGO_ENABLED=0
     goos:

@@ -7,7 +7,7 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/masa-finance/masa-oracle/node"
+	"github.com/Gzgod/masa-oracle/node"
 	"github.com/sirupsen/logrus"
 )
 

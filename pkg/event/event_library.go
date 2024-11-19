@@ -6,7 +6,7 @@ import (
 
 	"github.com/sirupsen/logrus"
 
-	data_types "github.com/masa-finance/masa-oracle/pkg/workers/types"
+	data_types "github.com/Gzgod/masa-oracle/pkg/workers/types"
 )
 
 // Add this function to the existing file

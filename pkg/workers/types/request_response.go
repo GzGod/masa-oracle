@@ -5,8 +5,8 @@ import (
 	"github.com/multiformats/go-multiaddr"
 	"github.com/sirupsen/logrus"
 
-	"github.com/masa-finance/masa-oracle/node"
-	"github.com/masa-finance/masa-oracle/pkg/pubsub"
+	"github.com/Gzgod/masa-oracle/node"
+	"github.com/Gzgod/masa-oracle/pkg/pubsub"
 )
 
 type Worker struct {

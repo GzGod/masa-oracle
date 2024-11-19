@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"path/filepath"
 
-	"github.com/masa-finance/masa-oracle/contracts"
+	"github.com/Gzgod/masa-oracle/contracts"
 )
 
 // LoadContractAddresses loads the contract addresses from the addresses.json file.

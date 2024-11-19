@@ -7,10 +7,10 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/sirupsen/logrus"
 
-	node "github.com/masa-finance/masa-oracle/node"
-	"github.com/masa-finance/masa-oracle/pkg/event"
-	"github.com/masa-finance/masa-oracle/pkg/pubsub"
-	"github.com/masa-finance/masa-oracle/pkg/workers"
+	node "github.com/Gzgod/masa-oracle/node"
+	"github.com/Gzgod/masa-oracle/pkg/event"
+	"github.com/Gzgod/masa-oracle/pkg/pubsub"
+	"github.com/Gzgod/masa-oracle/pkg/workers"
 )
 
 type API struct {

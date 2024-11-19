@@ -11,16 +11,16 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/golang-jwt/jwt/v4"
 
-	"github.com/masa-finance/masa-oracle/docs"
-	"github.com/masa-finance/masa-oracle/pkg/pubsub"
-	"github.com/masa-finance/masa-oracle/pkg/workers"
+	"github.com/Gzgod/masa-oracle/docs"
+	"github.com/Gzgod/masa-oracle/pkg/pubsub"
+	"github.com/Gzgod/masa-oracle/pkg/workers"
 
 	"github.com/gin-contrib/cors"
 
 	"path/filepath"
 	"runtime"
 
-	"github.com/masa-finance/masa-oracle/node"
+	"github.com/Gzgod/masa-oracle/node"
 	swaggerFiles "github.com/swaggo/files"     // swagger embed files
 	ginSwagger "github.com/swaggo/gin-swagger" // ginSwagger middleware
 )

@@ -3,7 +3,7 @@ package workers
 import (
 	"sync"
 
-	"github.com/masa-finance/masa-oracle/pkg/workers/types"
+	"github.com/Gzgod/masa-oracle/pkg/workers/types"
 )
 
 type ResponseChannelMap struct {

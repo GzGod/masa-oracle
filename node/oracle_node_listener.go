@@ -14,7 +14,7 @@ import (
 	"github.com/libp2p/go-libp2p/core/peer"
 	"github.com/sirupsen/logrus"
 
-	pubsub2 "github.com/masa-finance/masa-oracle/pkg/pubsub"
+	pubsub2 "github.com/Gzgod/masa-oracle/pkg/pubsub"
 )
 
 // ListenToNodeTracker listens to the NodeTracker's NodeDataChan

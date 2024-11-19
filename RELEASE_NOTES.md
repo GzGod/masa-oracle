@@ -1,8 +1,8 @@
 # Masa Oracle Release Notes
 
-[All Releases](https://github.com/masa-finance/masa-oracle/releases)
+[All Releases](https://github.com/Gzgod/masa-oracle/releases)
 
-## [0.0.5.0](https://github.com/masa-finance/masa-oracle/releases) (2024)
+## [0.0.5.0](https://github.com/Gzgod/masa-oracle/releases) (2024)
 
 ## Overview
 

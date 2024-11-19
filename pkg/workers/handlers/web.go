@@ -5,8 +5,8 @@ import (
 
 	"github.com/sirupsen/logrus"
 
-	"github.com/masa-finance/masa-oracle/pkg/scrapers/web"
-	data_types "github.com/masa-finance/masa-oracle/pkg/workers/types"
+	"github.com/Gzgod/masa-oracle/pkg/scrapers/web"
+	data_types "github.com/Gzgod/masa-oracle/pkg/workers/types"
 )
 
 // WebHandler - All the web handlers implement the WorkHandler interface.

@@ -7,7 +7,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/masa-finance/masa-oracle/node/types"
+	"github.com/Gzgod/masa-oracle/node/types"
 
 	pubsub "github.com/libp2p/go-libp2p-pubsub"
 	"github.com/libp2p/go-libp2p/core/host"
