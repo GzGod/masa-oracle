@@ -15,13 +15,13 @@ import (
 	"github.com/sirupsen/logrus"
 )
 
-// HandleMessage implement subscription handler here
+// HandleMessage 实现订阅处理程序
 func (handler *SubscriptionHandler) HandleMessage(message *pubsub.Message) {
-	fmt.Println("Received a message")
+	fmt.Println("收到一条消息")
 	var gossip Gossip
 	err := json.Unmarshal(message.Data, &gossip)
 	if err != nil {
-		logrus.Errorf("[-] Failed to unmarshal message: %v", err)
+		logrus.Errorf("[-] 解析消息失败: %v", err)
 		return
 	}
 
@@ -29,28 +29,28 @@ func (handler *SubscriptionHandler) HandleMessage(message *pubsub.Message) {
 	handler.Gossips = append(handler.Gossips, gossip)
 	handler.mu.Unlock()
 
-	// logrus.Infof("added: %+v", gossip)
+	// logrus.Infof("已添加: %+v", gossip)
 }
 
-// showMenu creates and returns the menu component.
+// showMenu 创建并返回菜单组件。
 func handleMenu(app *tview.Application, output *tview.TextView) *tview.List {
 	menu := tview.NewList().
-		AddItem("Connect", "[darkgray]connect to an oracle node", '1', func() {
+		AddItem("连接", "[darkgray]连接到一个oracle节点", '1', func() {
 			handleOption(app, "1", output)
 		}).
-		// Items 2-5 removed - LLM functionality eliminated in	https://github.com/masa-finance/masa-oracle/pull/626
-		AddItem("Oracle Nodes", "[darkgray]view active nodes", '6', func() {
+		// 项目 2-5 已移除 - LLM 功能在 https://github.com/masa-finance/masa-oracle/pull/626 中被删除
+		AddItem("Oracle 节点", "[darkgray]查看活动节点", '6', func() {
 			handleOption(app, "6", output)
 		})
 
-	menu.AddItem("Quit", "[darkgray]press to exit", 'q', func() {
+	menu.AddItem("退出", "[darkgray]按下退出", 'q', func() {
 		handleOption(app, "7", output)
 	}).SetBorder(true).SetBorderColor(tcell.ColorGray)
 
 	return menu
 }
 
-// handleOption triggers actions based on user selection.
+// handleOption 根据用户选择触发操作。
 func handleOption(app *tview.Application, option string, output *tview.TextView) {
 	switch option {
 	case "1":
@@ -59,47 +59,47 @@ func handleOption(app *tview.Application, option string, output *tview.TextView)
 
 		var form *tview.Form
 
-		// Create a new form
+		// 创建一个新表单
 		form = tview.NewForm().
-			AddInputField("Node Multiaddress", "", 60, nil, nil).
-			AddButton("OK", func() {
-				inputValue := form.GetFormItemByLabel("Node Multiaddress").(*tview.InputField).GetText()
+			AddInputField("节点多地址", "", 60, nil, nil).
+			AddButton("确定", func() {
+				inputValue := form.GetFormItemByLabel("节点多地址").(*tview.InputField).GetText()
 				appConfig.Address = inputValue
 
 				if appConfig.Address == "" {
-					output.SetText("A multiaddress was not entered. Please enter the masa node multiaddress and try again.")
+					output.SetText("未输入多地址。请输入Masa节点多地址并重试。")
 				} else {
-					output.SetText(fmt.Sprintf("Connecting to: %s", appConfig.Address))
+					output.SetText(fmt.Sprintf("连接到: %s", appConfig.Address))
 
 					maddr, err := multiaddr.NewMultiaddr(appConfig.Address)
 					if err != nil {
 						logrus.Errorf("[-] %v", err)
 					}
 
-					// Create a libp2p host to connect to the Masa node
+					// 创建一个libp2p主机以连接到Masa节点
 					host, err := libp2p.New(libp2p.NoSecurity, libp2p.Transport(quic.NewTransport))
 					if err != nil {
 						logrus.Errorf("[-] %v", err)
 					}
 
-					// Extract the peer ID from the multiaddress
+					// 从多地址中提取对等ID
 					peerInfo, err := peer.AddrInfoFromP2pAddr(maddr)
 					if err != nil {
 						logrus.Errorf("[-] %v", err)
 					}
 
-					// Connect to the peer
+					// 连接到对等节点
 					if err := host.Connect(context.Background(), *peerInfo); err != nil {
 						logrus.Errorf("[-] %v", err)
 					}
 
-					output.SetText(fmt.Sprintf("Successfully connected to node: %s", appConfig.Address))
+					output.SetText(fmt.Sprintf("成功连接到节点: %s", appConfig.Address))
 				}
-				app.SetRoot(mainFlex, true) // Return to main view
+				app.SetRoot(mainFlex, true) // 返回主视图
 			}).
-			AddButton("Cancel", func() {
-				output.SetText("Cancelled entering a masa node multiaddress.")
-				app.SetRoot(mainFlex, true) // Return to main view
+			AddButton("取消", func() {
+				output.SetText("取消输入Masa节点多地址。")
+				app.SetRoot(mainFlex, true) // 返回主视图
 			})
 
 		form.SetBorder(true).SetBorderColor(tcell.ColorBlue)
@@ -112,12 +112,12 @@ func handleOption(app *tview.Application, option string, output *tview.TextView)
 
 		table := tview.NewTable().SetBorders(true).SetFixed(1, 0)
 
-		// Set header titles
-		table.SetCell(0, 0, tview.NewTableCell("Address").SetTextColor(tcell.ColorYellow).SetAlign(tview.AlignCenter))
-		table.SetCell(0, 1, tview.NewTableCell("IsStaked").SetTextColor(tcell.ColorYellow).SetAlign(tview.AlignCenter))
-		table.SetCell(0, 2, tview.NewTableCell("IsValidator").SetTextColor(tcell.ColorYellow).SetAlign(tview.AlignCenter))
+		// 设置标题
+		table.SetCell(0, 0, tview.NewTableCell("地址").SetTextColor(tcell.ColorYellow).SetAlign(tview.AlignCenter))
+		table.SetCell(0, 1, tview.NewTableCell("是否质押").SetTextColor(tcell.ColorYellow).SetAlign(tview.AlignCenter))
+		table.SetCell(0, 2, tview.NewTableCell("是否验证者").SetTextColor(tcell.ColorYellow).SetAlign(tview.AlignCenter))
 
-		// Set cell values for each row
+		// 设置每行的单元格值
 		for i := 1; i <= 10; i++ {
 			table.SetCell(i, 0, tview.NewTableCell("/ip4/127.0.0.1/udp/4001/quic-v1/p2p/16Uiu2HAmVRNDAZ6J1eHTV8twU6VaX8vqhe7VehPBNrCzDrHB9aQn"))
 			table.SetCell(i, 1, tview.NewTableCell("false"))
@@ -131,7 +131,7 @@ func handleOption(app *tview.Application, option string, output *tview.TextView)
 					AddItem(handleMenu(app, output), 0, 1, true).
 					AddItem(output, 0, 3, false)
 
-				app.SetRoot(mainFlex, true) // Return to main view
+				app.SetRoot(mainFlex, true) // 返回主视图
 				return
 			}
 			if key == tcell.KeyEnter {
@@ -152,7 +152,7 @@ func handleOption(app *tview.Application, option string, output *tview.TextView)
 			AddItem(flex, 0, 3, true)
 
 		flex.SetBorder(true).SetBorderColor(tcell.ColorBlue).
-			SetTitle(" Masa Oracle Nodes, press esc to return to menu ")
+			SetTitle(" Masa Oracle 节点，按 esc 返回菜单 ")
 
 		app.SetRoot(mainFlex, true).SetFocus(table)
 	case "7":
@@ -160,13 +160,13 @@ func handleOption(app *tview.Application, option string, output *tview.TextView)
 		modalFlex.SetBorderPadding(1, 1, 1, 1)
 
 		modal := tview.NewModal().
-			SetText("Are you sure you want to quit?").
-			AddButtons([]string{"Yes", "No"}).
+			SetText("您确定要退出吗？").
+			AddButtons([]string{"是", "否"}).
 			SetDoneFunc(func(buttonIndex int, buttonLabel string) {
-				if buttonLabel == "Yes" {
+				if buttonLabel == "是" {
 					app.Stop()
 				}
-				app.SetRoot(mainFlex, true) // Return to main view
+				app.SetRoot(mainFlex, true) // 返回主视图
 			})
 
 		modalFlex.AddItem(modal, 0, 1, true)
@@ -176,3 +176,4 @@ func handleOption(app *tview.Application, option string, output *tview.TextView)
 		break
 	}
 }
+
